@@ -1,4 +1,4 @@
-import { NextAuthOptions } from 'next-auth';
+import NextAuth, { NextAuthConfig } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaClient } from 'database';
 import { verifyPassword } from './utils/password';
@@ -6,7 +6,7 @@ import { loginSchema } from './validations/auth';
 
 const prisma = new PrismaClient();
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: NextAuthConfig = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -72,3 +72,5 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
