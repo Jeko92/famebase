@@ -43,6 +43,9 @@ async function main() {
     console.log('Starting database seed...');
 
     // Clear existing data
+    await prisma.favorite.deleteMany();
+    await prisma.list.deleteMany();
+    await prisma.user.deleteMany();
     await prisma.influencerImage.deleteMany();
     await prisma.influencer.deleteMany();
     await prisma.campaign.deleteMany();
@@ -105,17 +108,92 @@ async function main() {
         },
     });
 
+    // Create sample users
+    const user1 = await prisma.user.create({
+        data: {
+            email: 'john.doe@example.com',
+            password: '$2a$10$dummyhashedpassword1', // In real app, use bcrypt
+            name: 'John Doe',
+        },
+    });
+
+    const user2 = await prisma.user.create({
+        data: {
+            email: 'jane.smith@example.com',
+            password: '$2a$10$dummyhashedpassword2',
+            name: 'Jane Smith',
+        },
+    });
+
+    console.log('Created sample users');
+
+    // Get first 5 influencers for favorites
+    const influencers = await prisma.influencer.findMany({
+        take: 5,
+    });
+
+    // Create favorites for user1
+    for (let i = 0; i < 3; i++) {
+        if (influencers[i]) {
+            await prisma.favorite.create({
+                data: {
+                    userId: user1.id,
+                    influencerId: influencers[i].id,
+                },
+            });
+        }
+    }
+
+    // Create favorites for user2
+    for (let i = 2; i < 5; i++) {
+        if (influencers[i]) {
+            await prisma.favorite.create({
+                data: {
+                    userId: user2.id,
+                    influencerId: influencers[i].id,
+                },
+            });
+        }
+    }
+
+    console.log('Created sample favorites');
+
+    // Create sample lists
+    await prisma.list.create({
+        data: {
+            name: 'My Top Influencers',
+            description: 'Favorite influencers for my campaigns',
+            userId: user1.id,
+        },
+    });
+
+    await prisma.list.create({
+        data: {
+            name: 'Beauty Influencers',
+            description: 'Curated list of beauty content creators',
+            userId: user2.id,
+        },
+    });
+
+    console.log('Created sample lists');
+
     console.log('Seeding completed successfully!');
 
     // Print summary
     const influencerCount = await prisma.influencer.count();
     const imageCount = await prisma.influencerImage.count();
     const campaignCount = await prisma.campaign.count();
+    const userCount = await prisma.user.count();
+    const favoriteCount = await prisma.favorite.count();
+    const listCount = await prisma.list.count();
 
     console.log('\n📊 Database Summary:');
     console.log(`   Influencers: ${influencerCount}`);
     console.log(`   Images: ${imageCount}`);
     console.log(`   Campaigns: ${campaignCount}`);
+    console.log(`   Users: ${userCount}`);
+    console.log(`   Favorites: ${favoriteCount}`);
+    console.log(`   Lists: ${listCount}`);
 }
 
 main()
