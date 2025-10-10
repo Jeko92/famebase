@@ -49,6 +49,9 @@ model Influencer {
   // Image gallery
   images          InfluencerImage[] @relation("InfluencerImages")
 
+  // Relations
+  favorites       Favorite[]        @relation("UserFavorites")
+
   // Metadata
   isVerified      Boolean           @default(false) @map("is_verified")
   isActive        Boolean           @default(true) @map("is_active")
@@ -120,4 +123,57 @@ enum CampaignStatus {
   PAUSED
   COMPLETED
   CANCELLED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // Hashed password
+  name      String
+
+  // Relations
+  favorites Favorite[]
+  lists     List[]
+
+  // Metadata
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@map("users")
+}
+
+model Favorite {
+  id           String     @id @default(cuid())
+  userId       String     @map("user_id")
+  influencerId String     @map("influencer_id")
+
+  // Relations
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  influencer   Influencer @relation("UserFavorites", fields: [influencerId], references: [id], onDelete: Cascade)
+
+  // Metadata
+  createdAt    DateTime   @default(now()) @map("created_at")
+
+  @@unique([userId, influencerId]) // Prevent duplicate favorites
+  @@index([userId])
+  @@index([influencerId])
+  @@map("favorites")
+}
+
+model List {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  userId      String   @map("user_id")
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Metadata
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([userId])
+  @@map("lists")
 }
