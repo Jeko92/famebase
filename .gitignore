@@ -1,0 +1,74 @@
+### Git ###
+# Git merge tool backups
+*.orig
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.icloud
+
+### Next.js ###
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Next.js
+.next/
+out/
+
+# Production
+build
+dist
+
+# Misc
+*.pem
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment files
+.env
+.env*.local
+
+# Vercel
+.vercel
+
+### TypeScript ###
+*.tsbuildinfo
+next-env.d.ts
+
+### Turborepo ###
+.turbo
+
+### IDEs - JetBrains (WebStorm/IntelliJ) ###
+.idea

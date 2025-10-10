@@ -1,0 +1,12 @@
+# Conventional Commit Co-Authors
+#
+# This file defines co-authors for use with the Conventional Commit plugin
+# Format: alias=Name <email@example.com>
+#
+# Usage in JetBrains IDEs:
+# When making a commit, you can reference co-authors by their alias
+
+# Example co-authors (replace with actual team members)
+# john=John Doe <john.doe@example.com>
+# jane=Jane Smith <jane.smith@example.com>
+# claude=Claude AI <noreply@anthropic.com>

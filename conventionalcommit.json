@@ -1,0 +1,108 @@
+{
+  "types": [
+    {
+      "type": "build",
+      "description": "Changes which affect the build system or external dependencies"
+    },
+    {
+      "type": "chore",
+      "description": "Changes which are not user-facing"
+    },
+    {
+      "type": "ci",
+      "description": "Changes which affect CI configuration files and scripts"
+    },
+    {
+      "type": "docs",
+      "description": "Changes which affect documentation"
+    },
+    {
+      "type": "feat",
+      "description": "Changes which introduce a new feature"
+    },
+    {
+      "type": "fix",
+      "description": "Changes which patch a bug"
+    },
+    {
+      "type": "perf",
+      "description": "Changes which improve performance"
+    },
+    {
+      "type": "refactor",
+      "description": "Changes which neither fix a bug nor add a feature"
+    },
+    {
+      "type": "revert",
+      "description": "Changes which revert a previous commit"
+    },
+    {
+      "type": "security",
+      "description": "Changes which improve security"
+    },
+    {
+      "type": "style",
+      "description": "Changes which do not affect code logic (formatting, whitespace)"
+    },
+    {
+      "type": "test",
+      "description": "Changes which add missing tests or correct existing tests"
+    }
+  ],
+  "scopes": [
+    {
+      "scope": "web",
+      "description": "Changes to the web application"
+    },
+    {
+      "scope": "database",
+      "description": "Changes to database schema, migrations, or utilities"
+    },
+    {
+      "scope": "ui",
+      "description": "Changes to shared UI components"
+    },
+    {
+      "scope": "config",
+      "description": "Changes to configuration files"
+    },
+    {
+      "scope": "deps",
+      "description": "Dependency updates"
+    },
+    {
+      "scope": "influencers",
+      "description": "Changes related to influencer features"
+    },
+    {
+      "scope": "campaigns",
+      "description": "Changes related to campaign features"
+    },
+    {
+      "scope": "api",
+      "description": "Changes to API routes and endpoints"
+    },
+    {
+      "scope": "auth",
+      "description": "Changes to authentication and authorization"
+    },
+    {
+      "scope": "images",
+      "description": "Changes to image handling and storage"
+    }
+  ],
+  "footerTypes": [
+    {
+      "type": "BREAKING CHANGE",
+      "description": "Introduces breaking changes"
+    },
+    {
+      "type": "Closes",
+      "description": "References issues that this commit closes"
+    },
+    {
+      "type": "Refs",
+      "description": "References related issues"
+    }
+  ]
+}

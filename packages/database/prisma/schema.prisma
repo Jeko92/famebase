@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NON_BINARY
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum Platform {
+  INSTAGRAM
+  YOUTUBE
+  TIKTOK
+  TWITCH
+  TWITTER
+  LINKEDIN
+  FACEBOOK
+}
+
+model Influencer {
+  id              String            @id @default(cuid())
+  externalId      String?           @unique @map("external_id") // Original ID from JSON (inf_001, etc.)
+  name            String
+  gender          Gender
+  age             Int
+  platforms       Platform[]
+  followers       Int
+  engagementRate  Float             @map("engagement_rate")
+  avgLikes        Int               @map("avg_likes")
+  avgComments     Int               @map("avg_comments")
+  topics          String[]
+  location        String
+  bio             String?
+  email           String?           @unique
+  phoneNumber     String?           @map("phone_number")
+  website         String?
+
+  // Profile image
+  profileImageUrl String?           @map("profile_image_url")
+
+  // Image gallery
+  images          InfluencerImage[] @relation("InfluencerImages")
+
+  // Metadata
+  isVerified      Boolean           @default(false) @map("is_verified")
+  isActive        Boolean           @default(true) @map("is_active")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  @@index([location])
+  @@index([followers])
+  @@index([engagementRate])
+  @@index([isActive])
+  @@map("influencers")
+}
+
+model InfluencerImage {
+  id            String      @id @default(cuid())
+  influencerId  String      @map("influencer_id")
+  influencer    Influencer  @relation("InfluencerImages", fields: [influencerId], references: [id], onDelete: Cascade)
+
+  // Image data
+  url           String      // URL or path to image
+  filename      String
+  mimeType      String      @map("mime_type")
+  size          Int         // File size in bytes
+  width         Int?
+  height        Int?
+
+  // Image metadata
+  alt           String?     // Alt text for accessibility
+  caption       String?
+
+  // Storage info
+  storageKey    String?     @map("storage_key") // For cloud storage (S3, etc.)
+  blurhash      String?     // For placeholder images
+
+  // Order and status
+  order         Int         @default(0)
+  isPublic      Boolean     @default(true) @map("is_public")
+
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  @@index([influencerId])
+  @@map("influencer_images")
+}
+
+model Campaign {
+  id              String         @id @default(cuid())
+  name            String
+  description     String?
+  budget          Float?
+  startDate       DateTime?      @map("start_date")
+  endDate         DateTime?      @map("end_date")
+  status          CampaignStatus @default(DRAFT)
+
+  targetTopics    String[]       @map("target_topics")
+  targetPlatforms Platform[]     @map("target_platforms")
+  minFollowers    Int?           @map("min_followers")
+  maxFollowers    Int?           @map("max_followers")
+
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  @@map("campaigns")
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
