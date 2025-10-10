@@ -9,14 +9,15 @@ export const loginSchema = z.object({
 });
 
 /**
- * Registration schema for validating new user data
+ * Base registration schema without refinements (for individual field validation)
  */
-export const registerSchema = z.object({
+export const registerBaseSchema = z.object({
   name: z
     .string()
     .min(2, 'Name must be at least 2 characters')
     .max(50, 'Name must be less than 50 characters'),
   email: z.string().email('Invalid email address'),
+  confirmEmail: z.string().email('Invalid email address'),
   password: z
     .string()
     .min(8, 'Password must be at least 8 characters')
@@ -24,6 +25,18 @@ export const registerSchema = z.object({
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/[0-9]/, 'Password must contain at least one number')
     .regex(/[^a-zA-Z0-9]/, 'Password must include at least one special character (e.g., !@#$%)'),
+  confirmPassword: z.string().min(1, 'Please confirm your password'),
+});
+
+/**
+ * Registration schema for validating new user data (with cross-field validation)
+ */
+export const registerSchema = registerBaseSchema.refine((data) => data.email === data.confirmEmail, {
+  message: 'Email addresses do not match',
+  path: ['confirmEmail'],
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'Passwords do not match',
+  path: ['confirmPassword'],
 });
 
 // Type exports for TypeScript
