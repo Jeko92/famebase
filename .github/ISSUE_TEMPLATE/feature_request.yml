@@ -18,77 +18,24 @@ body:
       required: true
 
   - type: textarea
-    id: problem
+    id: content
     attributes:
-      label: Problem Statement
-      description: What problem does this feature solve?
-      placeholder: I'm frustrated when... / It would be helpful if...
+      label: Issue Details
+      description: Describe the feature, enhancement, or task
+      placeholder: |
+        ## Issue #X: Title
+        **Labels:** `label1`, `label2`
+        **Priority:** High/Medium/Low
+
+        ### Description
+        Describe what needs to be done...
+
+        ### Tasks
+        - [ ] Task 1
+        - [ ] Task 2
+
+        ### Acceptance Criteria
+        - Criteria 1
+        - Criteria 2
     validations:
       required: true
-
-  - type: textarea
-    id: solution
-    attributes:
-      label: Proposed Solution
-      description: How would you like this to work?
-      placeholder: The feature should...
-    validations:
-      required: true
-
-  - type: dropdown
-    id: scope
-    attributes:
-      label: Affected Area
-      description: Which part of the application would this affect?
-      options:
-        - web
-        - database
-        - ui
-        - influencers
-        - campaigns
-        - api
-        - auth
-        - images
-        - other
-    validations:
-      required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      description: How important is this feature to you?
-      options:
-        - low
-        - medium
-        - high
-        - critical
-    validations:
-      required: true
-
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Alternatives Considered
-      description: Have you considered any alternative solutions?
-      placeholder: I've also thought about...
-    validations:
-      required: false
-
-  - type: textarea
-    id: additional
-    attributes:
-      label: Additional Context
-      description: Add any other context, mockups, or examples
-      placeholder: Screenshots, links, similar features in other apps, etc.
-    validations:
-      required: false
-
-  - type: checkboxes
-    id: implementation
-    attributes:
-      label: Implementation
-      description: Are you willing to help implement this feature?
-      options:
-        - label: I would like to implement this feature
-          required: false
