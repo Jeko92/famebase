@@ -239,17 +239,19 @@ export default function FormSection() {
         {isLoading ? 'Processing...' : mode === 'login' ? 'Log in' : 'Sign up'}
       </button>
 
-      {/* Footer */}
-      <p className="text-xs text-gray-500 text-center">
-        By signing up, you agree to Modash&apos;s{' '}
-        <a href="#" className="underline hover:text-gray-700">
-          Privacy policy
-        </a>{' '}
-        &{' '}
-        <a href="#" className="underline hover:text-gray-700">
-          Terms of service
-        </a>
-      </p>
+      {/* Footer - Only show on signup */}
+      {mode === 'signup' && (
+        <p className="text-xs text-gray-500 text-center">
+          By signing up, you agree to addFame&apos;s{' '}
+          <a href="#" className="underline hover:text-gray-700">
+            Privacy policy
+          </a>{' '}
+          &{' '}
+          <a href="#" className="underline hover:text-gray-700">
+            Terms of service
+          </a>
+        </p>
+      )}
     </form>
   );
 }

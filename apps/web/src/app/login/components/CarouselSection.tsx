@@ -2,7 +2,7 @@
 
 export default function CarouselSection() {
   return (
-    <div className="w-full h-full bg-gradient-to-br from-[#FFB8A8] via-[#FFB3D9] to-[#C4A5FF] rounded-l-3xl flex items-start p-12">
+    <div className="w-full h-full bg-gradient-to-br from-[#FFB8A8] via-[#FFB3D9] to-[#C4A5FF] flex items-start p-12">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
