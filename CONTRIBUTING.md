@@ -152,6 +152,7 @@ docs(readme): update installation instructions
 | `fix` | Changes which patch a bug |
 | `perf` | Changes which improve performance |
 | `refactor` | Changes which neither fix a bug nor add a feature |
+| `release` | Changes which create a new release version |
 | `revert` | Changes which revert a previous commit (see Revert Commits) |
 | `security` | Changes which improve security |
 | `style` | Changes which do not affect code logic, such as white-spaces, formatting |
