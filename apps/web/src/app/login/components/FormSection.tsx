@@ -12,6 +12,40 @@ export default function FormSection() {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const router = useRouter();
 
+  const validateField = (fieldName: string, value: string) => {
+    const schema = mode === 'signup' ? registerSchema : loginSchema;
+
+    try {
+      // Validate individual field
+      const fieldSchema = schema.pick({ [fieldName]: true } as Record<string, true>);
+      fieldSchema.parse({ [fieldName]: value });
+      // Clear error if validation passes
+      setFieldErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[fieldName];
+        return newErrors;
+      });
+    } catch (error) {
+      // Set error if validation fails
+      if (error instanceof Error && 'errors' in error) {
+        const zodError = error as { errors: Array<{ message: string }> };
+        if (zodError.errors && zodError.errors[0]) {
+          setFieldErrors(prev => ({
+            ...prev,
+            [fieldName]: zodError.errors[0].message
+          }));
+        }
+      }
+    }
+  };
+
+  const handleBlur = (fieldName: string, value: string) => {
+    // Only validate if field has been touched and has value
+    if (value.trim()) {
+      validateField(fieldName, value);
+    }
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -173,10 +207,16 @@ export default function FormSection() {
             name="name"
             type="text"
             placeholder="John Doe"
+            required
+            minLength={2}
+            maxLength={50}
             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all text-base ${
               fieldErrors.name ? 'border-red-300' : 'border-gray-300'
             }`}
             disabled={isLoading}
+            onBlur={(e) => handleBlur('name', e.target.value)}
+            aria-invalid={!!fieldErrors.name}
+            aria-describedby={fieldErrors.name ? 'name-error' : undefined}
           />
           {fieldErrors.name && (
             <p className="text-sm text-red-600">{fieldErrors.name}</p>
@@ -197,13 +237,17 @@ export default function FormSection() {
           name="email"
           type="email"
           placeholder="your@company.com"
+          required
           className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all text-base ${
             fieldErrors.email ? 'border-red-300' : 'border-gray-300'
           }`}
           disabled={isLoading}
+          onBlur={(e) => handleBlur('email', e.target.value)}
+          aria-invalid={!!fieldErrors.email}
+          aria-describedby={fieldErrors.email ? 'email-error' : undefined}
         />
         {fieldErrors.email && (
-          <p className="text-sm text-red-600">{fieldErrors.email}</p>
+          <p id="email-error" className="text-sm text-red-600">{fieldErrors.email}</p>
         )}
       </div>
 
@@ -220,13 +264,18 @@ export default function FormSection() {
           name="password"
           type="password"
           placeholder="••••••••"
+          required
+          minLength={mode === 'signup' ? 8 : 1}
           className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all text-base ${
             fieldErrors.password ? 'border-red-300' : 'border-gray-300'
           }`}
           disabled={isLoading}
+          onBlur={(e) => handleBlur('password', e.target.value)}
+          aria-invalid={!!fieldErrors.password}
+          aria-describedby={fieldErrors.password ? 'password-error' : undefined}
         />
         {fieldErrors.password && (
-          <p className="text-sm text-red-600">{fieldErrors.password}</p>
+          <p id="password-error" className="text-sm text-red-600">{fieldErrors.password}</p>
         )}
       </div>
 
