@@ -5,6 +5,7 @@ import { loginSchema } from './validations/auth';
 import { prisma } from './prisma';
 
 export const authConfig: NextAuthConfig = {
+  secret: process.env.AUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'credentials',
