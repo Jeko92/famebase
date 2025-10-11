@@ -20,12 +20,14 @@ interface InfluencerTableProps {
   influencers: Influencer[];
   favoritedIds?: Set<string>;
   onFavoriteChange?: (influencerId: string, isFavorited: boolean) => void;
+  onRowClick?: (influencerId: string) => void;
 }
 
 export default function InfluencerTable({
   influencers,
   favoritedIds = new Set(),
   onFavoriteChange,
+  onRowClick,
 }: InfluencerTableProps) {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
@@ -84,6 +86,7 @@ export default function InfluencerTable({
             onToggleSelect={() => handleToggleSelect(influencer.id)}
             isFavorited={favoritedIds.has(influencer.id)}
             onFavoriteChange={onFavoriteChange}
+            onRowClick={onRowClick}
           />
         ))}
       </div>
