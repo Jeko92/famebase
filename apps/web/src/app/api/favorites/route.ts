@@ -3,6 +3,9 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { addFavoriteSchema, FavoriteWithInfluencer } from '@/lib/validations/favorite';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 /**
  * GET /api/favorites
  * Get all favorites for the authenticated user

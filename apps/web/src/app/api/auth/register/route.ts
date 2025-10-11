@@ -11,6 +11,10 @@ const apiRegisterSchema = z.object({
   password: registerBaseSchema.shape.password,
 });
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
