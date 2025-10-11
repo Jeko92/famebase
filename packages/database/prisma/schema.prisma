@@ -49,6 +49,9 @@ model Influencer {
   // Image gallery
   images          InfluencerImage[] @relation("InfluencerImages")
 
+  // Sample posts
+  posts           Post[]            @relation("InfluencerPosts")
+
   // Relations
   favorites       Favorite[]        @relation("UserFavorites")
 
@@ -95,6 +98,34 @@ model InfluencerImage {
 
   @@index([influencerId])
   @@map("influencer_images")
+}
+
+model Post {
+  id            String      @id @default(cuid())
+  influencerId  String      @map("influencer_id")
+  influencer    Influencer  @relation("InfluencerPosts", fields: [influencerId], references: [id], onDelete: Cascade)
+
+  // Post content
+  platform      Platform
+  caption       String?     @db.Text
+  imageUrl      String      @map("image_url")
+  postUrl       String?     @map("post_url") // Link to actual post
+
+  // Engagement metrics
+  likes         Int         @default(0)
+  comments      Int         @default(0)
+  views         Int?
+  shares        Int?
+
+  // Metadata
+  postedAt      DateTime    @map("posted_at")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  @@index([influencerId])
+  @@index([platform])
+  @@index([postedAt])
+  @@map("posts")
 }
 
 model Campaign {

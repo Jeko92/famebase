@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Heart } from 'lucide-react';
 import InfluencerTable from '@/components/dashboard/InfluencerTable';
+import InfluencerDetailModal from '@/components/dashboard/InfluencerDetailModal';
 import { getFavorites } from '@/lib/api/favorites';
 import type { FavoriteWithInfluencer } from '@/lib/validations/favorite';
 
@@ -10,6 +11,8 @@ export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<FavoriteWithInfluencer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedInfluencerId, setSelectedInfluencerId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     loadFavorites();
@@ -34,6 +37,16 @@ export default function FavoritesPage() {
       // Remove from list when unfavorited
       setFavorites((prev) => prev.filter((fav) => fav.influencerId !== influencerId));
     }
+  };
+
+  const handleRowClick = (influencerId: string) => {
+    setSelectedInfluencerId(influencerId);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedInfluencerId(null);
   };
 
   // Transform favorites to influencer format for the table
@@ -116,10 +129,22 @@ export default function FavoritesPage() {
                 influencers={influencers}
                 favoritedIds={favoritedIds}
                 onFavoriteChange={handleFavoriteChange}
+                onRowClick={handleRowClick}
               />
             </>
           )}
         </>
+      )}
+
+      {/* Influencer Detail Modal */}
+      {selectedInfluencerId && (
+        <InfluencerDetailModal
+          influencerId={selectedInfluencerId}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          isFavorited={favoritedIds.has(selectedInfluencerId)}
+          onFavoriteChange={handleFavoriteChange}
+        />
       )}
     </div>
   );
