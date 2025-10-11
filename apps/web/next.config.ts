@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+    output: 'standalone',
     transpilePackages: ['database'],
 
     images: {
@@ -19,6 +20,14 @@ const nextConfig: NextConfig = {
     // Optimize middleware bundle size for Vercel Edge
     experimental: {
         serverMinification: true,
+    },
+
+    // Ensure Prisma binaries are included
+    webpack: (config, { isServer }) => {
+        if (isServer) {
+            config.externals.push('@prisma/client');
+        }
+        return config;
     },
 };
 
