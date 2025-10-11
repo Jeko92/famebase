@@ -40,5 +40,5 @@ export const registerSchema = registerBaseSchema.refine((data) => data.email ===
 });
 
 // Type exports for TypeScript
-export type LoginInput = z.infer<typeof loginSchema>;
-export type RegisterInput = z.infer<typeof registerSchema>;
+// export type LoginInput = z.infer<typeof loginSchema>;
+// export type RegisterInput = z.infer<typeof registerSchema>;
