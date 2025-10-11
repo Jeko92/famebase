@@ -12,6 +12,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Dashboard colors */
+  --color-primary-500: #8B5CF6;
+  --color-primary-600: #7C3AED;
+  --color-dark-bg: #0F0F23;
+  --color-dark-sidebar: #1A1A2E;
+  --color-dark-border: #2D2D44;
 }
 
 @media (prefers-color-scheme: dark) {
