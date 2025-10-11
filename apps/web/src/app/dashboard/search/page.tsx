@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import SearchFilters, { SearchFilterValues } from '@/components/dashboard/SearchFilters';
 import InfluencerTable from '@/components/dashboard/InfluencerTable';
 import { searchInfluencers, getDefaultSearchParams } from '@/lib/api/influencers';
+import { getFavorites } from '@/lib/api/favorites';
 import type { PaginationMetadata, InfluencerData } from '@/lib/validations/influencer';
 
 export default function SearchPage() {
@@ -14,11 +15,35 @@ export default function SearchPage() {
   const [currentFilters, setCurrentFilters] = useState<SearchFilterValues>({
     searchType: 'category',
   });
+  const [favoritedIds, setFavoritedIds] = useState<Set<string>>(new Set());
 
-  // Load initial data
+  // Load initial data and favorites
   useEffect(() => {
     loadInfluencers(getDefaultSearchParams());
+    loadFavorites();
   }, []);
+
+  const loadFavorites = async () => {
+    try {
+      const { favorites } = await getFavorites();
+      setFavoritedIds(new Set(favorites.map((fav) => fav.influencerId)));
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+      // Non-critical error, just log it
+    }
+  };
+
+  const handleFavoriteChange = (influencerId: string, isFavorited: boolean) => {
+    setFavoritedIds((prev) => {
+      const newSet = new Set(prev);
+      if (isFavorited) {
+        newSet.add(influencerId);
+      } else {
+        newSet.delete(influencerId);
+      }
+      return newSet;
+    });
+  };
 
   const loadInfluencers = async (filters: Partial<SearchFilterValues>) => {
     try {
@@ -106,7 +131,11 @@ export default function SearchPage() {
                 </p>
               </div>
             ) : (
-              <InfluencerTable influencers={influencers} />
+              <InfluencerTable
+                influencers={influencers}
+                favoritedIds={favoritedIds}
+                onFavoriteChange={handleFavoriteChange}
+              />
             )}
           </div>
 
