@@ -1,0 +1,396 @@
+[
+  {
+    "id": "inf_001",
+    "name": "LinaGlow",
+    "gender": "female",
+    "age": 27,
+    "platform": [
+      "Instagram",
+      "YouTube"
+    ],
+    "followers": 125000,
+    "engagementRate": 3.8,
+    "avgLikes": 4200,
+    "avgComments": 180,
+    "topics": [
+      "Beauty",
+      "Vegan",
+      "Skincare"
+    ],
+    "location": "Berlin, Germany"
+  },
+  {
+    "id": "inf_002",
+    "name": "FitWithMax",
+    "gender": "male",
+    "age": 31,
+    "platform": [
+      "YouTube",
+      "TikTok"
+    ],
+    "followers": 98000,
+    "engagementRate": 6.2,
+    "avgLikes": 5200,
+    "avgComments": 350,
+    "topics": [
+      "Fitness",
+      "Nutrition",
+      "Wellness"
+    ],
+    "location": "Munich, Germany"
+  },
+  {
+    "id": "inf_003",
+    "name": "GreenMind",
+    "gender": "male",
+    "age": 25,
+    "platform": [
+      "TikTok",
+      "Instagram"
+    ],
+    "followers": 210000,
+    "engagementRate": 8.5,
+    "avgLikes": 15000,
+    "avgComments": 500,
+    "topics": [
+      "Sustainability",
+      "Zero Waste",
+      "DIY"
+    ],
+    "location": "Hamburg, Germany"
+  },
+  {
+    "id": "inf_004",
+    "name": "MomsAndMore",
+    "gender": "female",
+    "age": 34,
+    "platform": [
+      "Instagram"
+    ],
+    "followers": 74000,
+    "engagementRate": 4.1,
+    "avgLikes": 2100,
+    "avgComments": 110,
+    "topics": [
+      "Parenting",
+      "Lifestyle",
+      "Home"
+    ],
+    "location": "Cologne, Germany"
+  },
+  {
+    "id": "inf_005",
+    "name": "TechDude",
+    "gender": "male",
+    "age": 29,
+    "platform": [
+      "YouTube"
+    ],
+    "followers": 163000,
+    "engagementRate": 5.0,
+    "avgLikes": 4300,
+    "avgComments": 290,
+    "topics": [
+      "Tech",
+      "Gadgets",
+      "Gaming"
+    ],
+    "location": "Stuttgart, Germany"
+  },
+  {
+    "id": "inf_006",
+    "name": "AnnaJourney",
+    "gender": "female",
+    "age": 28,
+    "platform": [
+      "Instagram",
+      "TikTok"
+    ],
+    "followers": 92000,
+    "engagementRate": 2.5,
+    "avgLikes": 2700,
+    "avgComments": 140,
+    "topics": [
+      "Travel",
+      "Photography",
+      "Adventure"
+    ],
+    "location": "Hamburg, Germany"
+  },
+  {
+    "id": "inf_007",
+    "name": "ChrisFit",
+    "gender": "male",
+    "age": 29,
+    "platform": [
+      "YouTube",
+      "Instagram"
+    ],
+    "followers": 99000,
+    "engagementRate": 3.3,
+    "avgLikes": 2900,
+    "avgComments": 155,
+    "topics": [
+      "Fitness",
+      "Bodybuilding",
+      "Motivation"
+    ],
+    "location": "Munich, Germany"
+  },
+  {
+    "id": "inf_008",
+    "name": "MiraDIY",
+    "gender": "female",
+    "age": 30,
+    "platform": [
+      "TikTok"
+    ],
+    "followers": 106000,
+    "engagementRate": 4.1,
+    "avgLikes": 3100,
+    "avgComments": 170,
+    "topics": [
+      "DIY",
+      "Crafts",
+      "Upcycling"
+    ],
+    "location": "Cologne, Germany"
+  },
+  {
+    "id": "inf_009",
+    "name": "LeoTech",
+    "gender": "female",
+    "age": 31,
+    "platform": [
+      "YouTube",
+      "Twitch"
+    ],
+    "followers": 113000,
+    "engagementRate": 4.9,
+    "avgLikes": 3300,
+    "avgComments": 185,
+    "topics": [
+      "Tech",
+      "Software Reviews",
+      "Gadgets"
+    ],
+    "location": "Frankfurt, Germany"
+  },
+  {
+    "id": "inf_010",
+    "name": "NinaNature",
+    "gender": "female",
+    "age": 32,
+    "platform": [
+      "Instagram",
+      "YouTube",
+      "TikTok"
+    ],
+    "followers": 120000,
+    "engagementRate": 5.7,
+    "avgLikes": 3500,
+    "avgComments": 200,
+    "topics": [
+      "Travel",
+      "Adventure",
+      "Eco Living"
+    ],
+    "location": "Berlin, Germany"
+  },
+  {
+    "id": "inf_011",
+    "name": "TomTravel",
+    "gender": "male",
+    "age": 33,
+    "platform": [
+      "Instagram"
+    ],
+    "followers": 127000,
+    "engagementRate": 6.5,
+    "avgLikes": 3700,
+    "avgComments": 215,
+    "topics": [
+      "Travel",
+      "Culture",
+      "Budget Trips"
+    ],
+    "location": "Hamburg, Germany"
+  },
+  {
+    "id": "inf_012",
+    "name": "SophieStyle",
+    "gender": "female",
+    "age": 34,
+    "platform": [
+      "TikTok",
+      "YouTube"
+    ],
+    "followers": 134000,
+    "engagementRate": 2.5,
+    "avgLikes": 3900,
+    "avgComments": 230,
+    "topics": [
+      "Fashion",
+      "Beauty",
+      "Lifestyle"
+    ],
+    "location": "Munich, Germany"
+  },
+  {
+    "id": "inf_013",
+    "name": "BenBuilds",
+    "gender": "male",
+    "age": 35,
+    "platform": [
+      "YouTube"
+    ],
+    "followers": 141000,
+    "engagementRate": 3.3,
+    "avgLikes": 4100,
+    "avgComments": 245,
+    "topics": [
+      "Home Improvement",
+      "DIY",
+      "Woodworking"
+    ],
+    "location": "Cologne, Germany"
+  },
+  {
+    "id": "inf_014",
+    "name": "EllaEats",
+    "gender": "non-binary",
+    "age": 36,
+    "platform": [
+      "Instagram",
+      "YouTube"
+    ],
+    "followers": 148000,
+    "engagementRate": 4.1,
+    "avgLikes": 4300,
+    "avgComments": 260,
+    "topics": [
+      "Food",
+      "Vegan",
+      "Nutrition"
+    ],
+    "location": "Frankfurt, Germany"
+  },
+  {
+    "id": "inf_015",
+    "name": "DavidDance",
+    "gender": "male",
+    "age": 22,
+    "platform": [
+      "TikTok"
+    ],
+    "followers": 155000,
+    "engagementRate": 4.9,
+    "avgLikes": 4500,
+    "avgComments": 275,
+    "topics": [
+      "Dance",
+      "Choreography",
+      "Fitness"
+    ],
+    "location": "Berlin, Germany"
+  },
+  {
+    "id": "inf_016",
+    "name": "FionaFilms",
+    "gender": "female",
+    "age": 23,
+    "platform": [
+      "YouTube",
+      "Instagram"
+    ],
+    "followers": 162000,
+    "engagementRate": 5.7,
+    "avgLikes": 4700,
+    "avgComments": 290,
+    "topics": [
+      "Filmmaking",
+      "Vlogs",
+      "Cinematography"
+    ],
+    "location": "Hamburg, Germany"
+  },
+  {
+    "id": "inf_017",
+    "name": "JanGames",
+    "gender": "male",
+    "age": 24,
+    "platform": [
+      "Twitch"
+    ],
+    "followers": 169000,
+    "engagementRate": 6.5,
+    "avgLikes": 4900,
+    "avgComments": 305,
+    "topics": [
+      "Gaming",
+      "Esports",
+      "Game Reviews"
+    ],
+    "location": "Munich, Germany"
+  },
+  {
+    "id": "inf_018",
+    "name": "LaraLife",
+    "gender": "female",
+    "age": 25,
+    "platform": [
+      "Instagram",
+      "YouTube"
+    ],
+    "followers": 176000,
+    "engagementRate": 2.5,
+    "avgLikes": 5100,
+    "avgComments": 320,
+    "topics": [
+      "Wellness",
+      "Self-Care",
+      "Productivity"
+    ],
+    "location": "Cologne, Germany"
+  },
+  {
+    "id": "inf_019",
+    "name": "MikeMusic",
+    "gender": "male",
+    "age": 26,
+    "platform": [
+      "TikTok",
+      "Twitch"
+    ],
+    "followers": 183000,
+    "engagementRate": 3.3,
+    "avgLikes": 5300,
+    "avgComments": 335,
+    "topics": [
+      "Music",
+      "Songwriting",
+      "Live Performances"
+    ],
+    "location": "Frankfurt, Germany"
+  },
+  {
+    "id": "inf_020",
+    "name": "ZoeZen",
+    "gender": "non-binary",
+    "age": 27,
+    "platform": [
+      "Instagram",
+      "TikTok"
+    ],
+    "followers": 190000,
+    "engagementRate": 4.1,
+    "avgLikes": 5500,
+    "avgComments": 350,
+    "topics": [
+      "Mindfulness",
+      "Meditation",
+      "Yoga"
+    ],
+    "location": "Berlin, Germany"
+  }
+]
