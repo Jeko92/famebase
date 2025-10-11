@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Heart, ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { formatNumber, formatEngagement, getGenderAvatar } from '@/lib/utils/format';
+import FavoriteButton from './FavoriteButton';
 
 interface InfluencerRowProps {
   influencer: {
@@ -20,9 +21,17 @@ interface InfluencerRowProps {
   };
   isSelected: boolean;
   onToggleSelect: () => void;
+  isFavorited?: boolean;
+  onFavoriteChange?: (influencerId: string, isFavorited: boolean) => void;
 }
 
-export default function InfluencerRow({ influencer, isSelected, onToggleSelect }: InfluencerRowProps) {
+export default function InfluencerRow({
+  influencer,
+  isSelected,
+  onToggleSelect,
+  isFavorited = false,
+  onFavoriteChange,
+}: InfluencerRowProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const avatarUrl = influencer.profileImageUrl || getGenderAvatar(influencer.name, influencer.gender);
@@ -71,12 +80,11 @@ export default function InfluencerRow({ influencer, isSelected, onToggleSelect }
 
         {/* Actions */}
         <div className="ml-auto flex items-center gap-2">
-          <button
-            className="p-2 text-gray-400 hover:text-white transition-colors"
-            title="Add to favorites"
-          >
-            <Heart className="h-5 w-5" />
-          </button>
+          <FavoriteButton
+            influencerId={influencer.id}
+            isFavorited={isFavorited}
+            onFavoriteChange={(isFav) => onFavoriteChange?.(influencer.id, isFav)}
+          />
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="p-2 text-gray-400 hover:text-white transition-colors"
