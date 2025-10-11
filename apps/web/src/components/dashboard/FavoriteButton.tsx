@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Heart } from 'lucide-react';
 import { addFavorite, removeFavorite } from '@/lib/api/favorites';
 
@@ -18,6 +18,11 @@ export default function FavoriteButton({
   size = 'md',
 }: FavoriteButtonProps) {
   const [isFavorited, setIsFavorited] = useState(initialFavorited);
+
+  // Sync with parent when prop changes
+  useEffect(() => {
+    setIsFavorited(initialFavorited);
+  }, [initialFavorited]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleFavorite = async (e: React.MouseEvent) => {
