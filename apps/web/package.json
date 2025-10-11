@@ -10,6 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@adfame/ui": "workspace:*",
     "bcryptjs": "^3.0.2",
     "database": "workspace:*",
     "next": "^15.5.0",
