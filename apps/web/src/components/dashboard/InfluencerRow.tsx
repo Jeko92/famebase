@@ -23,6 +23,7 @@ interface InfluencerRowProps {
   onToggleSelect: () => void;
   isFavorited?: boolean;
   onFavoriteChange?: (influencerId: string, isFavorited: boolean) => void;
+  onRowClick?: (influencerId: string) => void;
 }
 
 export default function InfluencerRow({
@@ -31,10 +32,17 @@ export default function InfluencerRow({
   onToggleSelect,
   isFavorited = false,
   onFavoriteChange,
+  onRowClick,
 }: InfluencerRowProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const avatarUrl = influencer.profileImageUrl || getGenderAvatar(influencer.name, influencer.gender);
+
+  const handleRowClick = () => {
+    if (onRowClick) {
+      onRowClick(influencer.id);
+    }
+  };
 
   return (
     <div className="border-b border-gray-800">
@@ -47,8 +55,11 @@ export default function InfluencerRow({
           className="h-4 w-4 rounded accent-primary-500"
         />
 
-        {/* Avatar & Info */}
-        <div className="flex min-w-[250px] items-center gap-3">
+        {/* Avatar & Info - Clickable */}
+        <button
+          onClick={handleRowClick}
+          className="flex min-w-[250px] items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity text-left"
+        >
           <Image
             src={avatarUrl}
             alt={influencer.name}
@@ -61,7 +72,7 @@ export default function InfluencerRow({
             <div className="font-medium text-white">{influencer.name}</div>
             <div className="text-sm text-gray-400">@{influencer.name.toLowerCase().replace(/\s+/g, '')}</div>
           </div>
-        </div>
+        </button>
 
         {/* Followers */}
         <div className="min-w-[100px] text-white">

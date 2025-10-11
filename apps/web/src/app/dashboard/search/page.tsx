@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import SearchFilters, { SearchFilterValues } from '@/components/dashboard/SearchFilters';
 import InfluencerTable from '@/components/dashboard/InfluencerTable';
+import InfluencerDetailModal from '@/components/dashboard/InfluencerDetailModal';
 import { searchInfluencers, getDefaultSearchParams } from '@/lib/api/influencers';
 import { getFavorites } from '@/lib/api/favorites';
 import type { PaginationMetadata, InfluencerData } from '@/lib/validations/influencer';
@@ -16,6 +17,8 @@ export default function SearchPage() {
     searchType: 'category',
   });
   const [favoritedIds, setFavoritedIds] = useState<Set<string>>(new Set());
+  const [selectedInfluencerId, setSelectedInfluencerId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Load initial data and favorites
   useEffect(() => {
@@ -78,6 +81,16 @@ export default function SearchPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleRowClick = (influencerId: string) => {
+    setSelectedInfluencerId(influencerId);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedInfluencerId(null);
+  };
+
   return (
     <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
       {/* Header */}
@@ -135,6 +148,7 @@ export default function SearchPage() {
                 influencers={influencers}
                 favoritedIds={favoritedIds}
                 onFavoriteChange={handleFavoriteChange}
+                onRowClick={handleRowClick}
               />
             )}
           </div>
@@ -164,6 +178,17 @@ export default function SearchPage() {
             </div>
           )}
         </>
+      )}
+
+      {/* Influencer Detail Modal */}
+      {selectedInfluencerId && (
+        <InfluencerDetailModal
+          influencerId={selectedInfluencerId}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          isFavorited={favoritedIds.has(selectedInfluencerId)}
+          onFavoriteChange={handleFavoriteChange}
+        />
       )}
     </div>
   );
