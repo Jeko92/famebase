@@ -102,9 +102,7 @@ export default function SignupForm() {
       // Validate signup data
       const result = registerSchema.safeParse(data);
       if (!result.success) {
-        console.log('Validation failed:', result.error);
         const errors = extractValidationErrors(result.error);
-        console.log('Extracted errors:', errors);
         setFieldErrors(errors);
         setError('Please fix the validation errors below');
         setIsLoading(false);
