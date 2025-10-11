@@ -126,10 +126,11 @@ enum CampaignStatus {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String   // Hashed password
-  name      String
+  id              String   @id @default(cuid())
+  email           String   @unique
+  password        String   // Hashed password
+  name            String
+  profileImageUrl String?  @map("profile_image_url")
 
   // Relations
   favorites Favorite[]
