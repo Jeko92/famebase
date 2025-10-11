@@ -1,13 +1,24 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-    output: 'standalone',
     transpilePackages: ['database'],
+
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'api.dicebear.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
+            },
+        ],
+    },
+
+    // Optimize middleware bundle size for Vercel Edge
     experimental: {
-        // Enable Turbopack for builds (beta)
-        turbo: {
-            // Add any turbopack-specific config here
-        }
+        serverMinification: true,
     },
 };
 
