@@ -4,25 +4,10 @@ import { useState, useEffect } from 'react';
 import SearchFilters, { SearchFilterValues } from '@/components/dashboard/SearchFilters';
 import InfluencerTable from '@/components/dashboard/InfluencerTable';
 import { searchInfluencers, getDefaultSearchParams } from '@/lib/api/influencers';
-import type { PaginationMetadata } from '@/lib/validations/influencer';
-
-interface Influencer {
-  id: string;
-  name: string;
-  gender: string;
-  platforms: string[];
-  followers: number;
-  engagementRate: number;
-  avgLikes: number;
-  avgComments: number;
-  topics: string[];
-  location: string;
-  bio?: string | null;
-  profileImageUrl?: string | null;
-}
+import type { PaginationMetadata, InfluencerData } from '@/lib/validations/influencer';
 
 export default function SearchPage() {
-  const [influencers, setInfluencers] = useState<Influencer[]>([]);
+  const [influencers, setInfluencers] = useState<InfluencerData[]>([]);
   const [pagination, setPagination] = useState<PaginationMetadata | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

@@ -79,7 +79,28 @@ export interface PaginationMetadata {
   hasMore: boolean;
 }
 
+// Influencer data structure returned from API
+export interface InfluencerData {
+  id: string;
+  externalId: string | null;
+  name: string;
+  gender: string;
+  age: number;
+  platforms: string[];
+  followers: number;
+  engagementRate: number;
+  avgLikes: number;
+  avgComments: number;
+  topics: string[];
+  location: string;
+  bio: string | null;
+  profileImageUrl: string | null;
+  email: string | null;
+  isVerified: boolean;
+  createdAt: Date;
+}
+
 export interface InfluencerSearchResponse {
-  data: unknown[]; // Will be typed with Prisma Influencer type
+  data: InfluencerData[];
   pagination: PaginationMetadata;
 }
