@@ -46,6 +46,7 @@ async function main() {
     await prisma.favorite.deleteMany();
     await prisma.list.deleteMany();
     await prisma.user.deleteMany();
+    await prisma.post.deleteMany();
     await prisma.influencerImage.deleteMany();
     await prisma.influencer.deleteMany();
     await prisma.campaign.deleteMany();
@@ -77,6 +78,60 @@ async function main() {
 
         console.log(`Created influencer: ${influencer.name}`);
     }
+
+    // Create sample posts for influencers
+    console.log('Creating sample posts...');
+    const allInfluencers = await prisma.influencer.findMany();
+
+    const samplePostCaptions = [
+        "Just dropped some amazing content! What do you think? 🔥",
+        "Behind the scenes of today's shoot! Love how this turned out 📸",
+        "New collaboration alert! So excited to share this with you all ✨",
+        "Throwback to one of my favorite moments! Miss these vibes 💫",
+        "Current mood: ready for anything! Who's with me? 💪",
+    ];
+
+    const sampleImages = [
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7",
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+        "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3",
+        "https://images.unsplash.com/photo-1533228100845-08145b01de14",
+    ];
+
+    for (const influencer of allInfluencers) {
+        const numPosts = Math.floor(Math.random() * 3) + 3; // 3-5 posts
+        const platforms = influencer.platforms;
+
+        for (let i = 0; i < numPosts; i++) {
+            const platform = platforms[Math.floor(Math.random() * platforms.length)];
+            const daysAgo = Math.floor(Math.random() * 90); // Posts within last 90 days
+            const postedDate = new Date();
+            postedDate.setDate(postedDate.getDate() - daysAgo);
+
+            const baseLikes = Math.floor(influencer.avgLikes * (0.7 + Math.random() * 0.6));
+            const baseComments = Math.floor(influencer.avgComments * (0.7 + Math.random() * 0.6));
+
+            await prisma.post.create({
+                data: {
+                    influencerId: influencer.id,
+                    platform: platform,
+                    caption: samplePostCaptions[i % samplePostCaptions.length],
+                    imageUrl: `${sampleImages[i % sampleImages.length]}?w=600&h=600&fit=crop`,
+                    postUrl: `https://${platform.toLowerCase()}.com/p/${influencer.name.toLowerCase().replace(/\s+/g, '')}/${Math.random().toString(36).substring(7)}`,
+                    likes: baseLikes,
+                    comments: baseComments,
+                    views: platform === 'YOUTUBE' || platform === 'TIKTOK' ? Math.floor(baseLikes * 10) : null,
+                    shares: Math.floor(baseComments * 0.5),
+                    postedAt: postedDate,
+                },
+            });
+        }
+
+        console.log(`Created ${numPosts} posts for ${influencer.name}`);
+    }
+
+    console.log('Sample posts created successfully!');
 
     // Create some sample campaigns
     await prisma.campaign.create({
@@ -181,6 +236,7 @@ async function main() {
 
     // Print summary
     const influencerCount = await prisma.influencer.count();
+    const postCount = await prisma.post.count();
     const imageCount = await prisma.influencerImage.count();
     const campaignCount = await prisma.campaign.count();
     const userCount = await prisma.user.count();
@@ -189,6 +245,7 @@ async function main() {
 
     console.log('\n📊 Database Summary:');
     console.log(`   Influencers: ${influencerCount}`);
+    console.log(`   Posts: ${postCount}`);
     console.log(`   Images: ${imageCount}`);
     console.log(`   Campaigns: ${campaignCount}`);
     console.log(`   Users: ${userCount}`);
