@@ -13,6 +13,7 @@
     "@adfame/ui": "workspace:*",
     "bcryptjs": "^3.0.2",
     "database": "workspace:*",
+    "lucide-react": "^0.545.0",
     "next": "^15.5.0",
     "next-auth": "5.0.0-beta.29",
     "react": "^19.0.0",
