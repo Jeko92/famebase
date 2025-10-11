@@ -1,14 +1,22 @@
 import { NextResponse } from 'next/server';
 import { hashPassword } from '@/lib/utils/password';
-import { registerSchema } from '@/lib/validations/auth';
+import { registerBaseSchema } from '@/lib/validations/auth';
 import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
+
+// API schema - only validates the fields we actually need
+const apiRegisterSchema = z.object({
+  name: registerBaseSchema.shape.name,
+  email: registerBaseSchema.shape.email,
+  password: registerBaseSchema.shape.password,
+});
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
     // Validate input
-    const result = registerSchema.safeParse(body);
+    const result = apiRegisterSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json(
         { error: 'Invalid input', details: result.error.flatten() },
