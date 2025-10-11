@@ -113,6 +113,22 @@ The application uses the following main models:
 - Image gallery support
 - Search and filter capabilities
 - Analytics and metrics tracking
+- User authentication with NextAuth
+- Favorites management system
+- Responsive design for mobile and desktop
+
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions on deploying to Vercel.
+
+### Quick Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/addfame-famebase)
+
+**Note**: You'll need to:
+1. Set up a PostgreSQL database (Neon, Supabase, or Vercel Postgres)
+2. Configure environment variables (see DEPLOYMENT.md)
+3. Run database migrations after first deployment
 
 ## Contributing
 
